@@ -74,6 +74,13 @@
   --sidebar-accent-foreground: oklch(0.205 0 0);
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
+
+  /* custom color */
+  --custom-1: #0d1b2a;
+  --custom-2: #1b263b;
+  --custom-3: #415a77;
+  --custom-4: #778da9;
+  --custom-5: #e0e1dd;
 }
 
 .dark {
