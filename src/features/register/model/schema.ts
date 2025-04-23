@@ -1,0 +1,12 @@
+import { z } from "zod";
+
+const registerSchema = z.object({
+  isReceived: z.string(),
+  patientId: z.string(),
+  patientName: z.string(),
+  isMale: z.boolean(),
+  birthday: z.string(),
+  operationDate: z.string(),
+});
+
+export default registerSchema;
