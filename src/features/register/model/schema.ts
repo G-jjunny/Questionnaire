@@ -4,7 +4,7 @@ const registerSchema = z.object({
   isReceived: z.string(),
   patientId: z.string(),
   patientName: z.string(),
-  isMale: z.boolean(),
+  isMale: z.string(),
   birthday: z.string(),
   operationDate: z.string(),
 });

@@ -49,8 +49,24 @@ const RegisterForm = () => {
     resolver: zodResolver(registerSchema),
   });
 
+  const stepField: Record<
+    (typeof steps)[number],
+    (keyof z.infer<typeof registerSchema>)[]
+  > = {
+    first: ["isReceived"],
+    second: ["patientId", "patientName", "isMale", "birthday", "operationDate"],
+  };
+
   const { currentStep, next, back, isFirst, isLast } =
     useStepForm<(typeof steps)[number]>(steps);
+
+  const handleNext = async () => {
+    const valid = await form.trigger(stepField[currentStep]);
+
+    if (valid) {
+      next();
+    }
+  };
 
   const onSubmit = (value: z.infer<typeof registerSchema>) => {
     console.log(value);
@@ -80,7 +96,11 @@ const RegisterForm = () => {
                 Back
               </Button>
             )}
-            {!isLast && <Button type="submit">Next</Button>}
+            {!isLast && (
+              <Button type="button" onClick={handleNext}>
+                Next
+              </Button>
+            )}
             {isLast && <Button type="submit">Submit</Button>}
           </div>
         </form>

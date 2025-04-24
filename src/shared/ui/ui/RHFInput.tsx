@@ -30,17 +30,19 @@ const RHFInput = <T extends FieldValues>({
       control={form.control}
       name={name}
       render={({ field }) => (
-        <FormItem className="flex gap-2 items-center">
-          <FormLabel className="w-[100px] font-bold">{label}</FormLabel>
-          <FormControl>
-            <Input
-              type={type}
-              placeholder={placeholder}
-              {...field}
-              className={className}
-            />
-          </FormControl>
-          <FormMessage />
+        <FormItem className="flex flex-col gap-0">
+          <div className="flex gap-2 items-center">
+            <FormLabel className="w-[100px] font-bold">{label}</FormLabel>
+            <FormControl>
+              <Input
+                type={type}
+                placeholder={placeholder}
+                {...field}
+                className={className}
+              />
+            </FormControl>
+          </div>
+          <FormMessage className=" text-end" />
         </FormItem>
       )}
     />
