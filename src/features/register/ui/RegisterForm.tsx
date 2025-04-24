@@ -41,21 +41,13 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import registerSchema from "../model/schema";
 import useStepForm from "../model/useStepForm";
 import { Button } from "@/shared/ui/shadcn/button";
-
-const steps = ["first", "second"] as ("first" | "second")[];
+import ThirdStep from "./ThirdStep";
+import { STEP, stepField, steps } from "../model/type";
 
 const RegisterForm = () => {
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
   });
-
-  const stepField: Record<
-    (typeof steps)[number],
-    (keyof z.infer<typeof registerSchema>)[]
-  > = {
-    first: ["isReceived"],
-    second: ["patientId", "patientName", "isMale", "birthday", "operationDate"],
-  };
 
   const { currentStep, next, back, isFirst, isLast } =
     useStepForm<(typeof steps)[number]>(steps);
@@ -87,8 +79,10 @@ const RegisterForm = () => {
           })}
           className="space-y-4"
         >
-          {currentStep === "first" && <FirstStep form={form} />}
-          {currentStep === "second" && <SecondStep form={form} />}
+          {/* 단계별 form 스텝 */}
+          {currentStep === STEP.FIRST && <FirstStep form={form} />}
+          {currentStep === STEP.SECOND && <SecondStep form={form} />}
+          {currentStep === STEP.THIRD && <ThirdStep form={form} />}
 
           <div className="flex justify-between pt-4">
             {!isFirst && (
