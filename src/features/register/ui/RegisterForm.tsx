@@ -1,40 +1,6 @@
-// import { Form } from "@/shared/ui/shadcn/form";
-// import FirstStep from "./FirstStep";
-// import Stepper from "./Stepper";
-// import { useForm } from "react-hook-form";
-// import { z } from "zod";
-// import { zodResolver } from "@hookform/resolvers/zod";
-// import registerSchema from "../model/schema";
-// import SecondStep from "./SecondStep";
-
-// const RegisterForm = () => {
-//   const form = useForm<z.infer<typeof registerSchema>>({
-//     resolver: zodResolver(registerSchema),
-//   });
-
-//   const onSubmit = (value: z.infer<typeof registerSchema>) => {
-//     console.log(value);
-//   };
-
-//   return (
-//     <div>
-//       <Stepper />
-//       <Form {...form}>
-//         <form onSubmit={form.handleSubmit(onSubmit)}>
-//           <FirstStep form={form} />
-//           <SecondStep form={form} />
-//         </form>
-//       </Form>
-//     </div>
-//   );
-// };
-
-// export default RegisterForm;
-
 import { Form } from "@/shared/ui/shadcn/form";
 import FirstStep from "./FirstStep";
 import SecondStep from "./SecondStep";
-import Stepper from "./Stepper";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
