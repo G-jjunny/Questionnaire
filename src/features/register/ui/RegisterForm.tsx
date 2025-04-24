@@ -9,8 +9,11 @@ import useStepForm from "../model/useStepForm";
 import { Button } from "@/shared/ui/shadcn/button";
 import ThirdStep from "./ThirdStep";
 import { STEP, stepField, steps } from "../model/type";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "@/shared/contants/routes";
 
 const RegisterForm = () => {
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
   });
@@ -51,7 +54,11 @@ const RegisterForm = () => {
           {currentStep === STEP.THIRD && <ThirdStep form={form} />}
 
           <div className="flex justify-between pt-4">
-            {!isFirst && (
+            {isFirst ? (
+              <Button type="button" onClick={() => navigate(ROUTES.ROOT)}>
+                Back
+              </Button>
+            ) : (
               <Button type="button" onClick={back}>
                 Back
               </Button>
