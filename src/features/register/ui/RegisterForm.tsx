@@ -14,6 +14,8 @@ import { ROUTES } from "@/shared/contants/routes";
 
 const RegisterForm = () => {
   const navigate = useNavigate();
+
+  // 작성한 zod schema object로부터 타입 추론
   const form = useForm<z.infer<typeof registerSchema>>({
     resolver: zodResolver(registerSchema),
   });
@@ -23,19 +25,23 @@ const RegisterForm = () => {
 
   const handleNext = async () => {
     const valid = await form.trigger(stepField[currentStep]);
-
     if (valid) {
+      // 해당 feild에 대한 비동기 유효성 검사
       next();
     }
   };
 
   const onSubmit = (value: z.infer<typeof registerSchema>) => {
+    /** todos :
+     * submit 비즈니스 로직 추가
+     */
     console.log(value);
   };
 
   return (
     <div className="space-y-4">
-      {/* <Stepper currentStep={currentStep} steps={steps} /> */}
+      {/* todos : 단계별 stepper UI */}
+      {/* <Stepper currentStep={currentStep} steps={steps} />  */}
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit((data) => {
