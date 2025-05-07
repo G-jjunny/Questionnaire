@@ -5,8 +5,13 @@ import { z } from "zod";
 import formSchema from "../model/schema";
 import RHFInput from "@/shared/ui/ui/RHFInput";
 import { Button } from "@/shared/ui/shadcn/button";
+import { useMutation } from "@tanstack/react-query";
+import { authQueries } from "../api/queries";
+import { useNavigate } from "react-router-dom";
+import { ROUTES } from "@/shared/contants/routes";
 
 const SignForm = () => {
+  const navigate = useNavigate();
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -15,8 +20,20 @@ const SignForm = () => {
     },
   });
 
+  const { mutate, isPending } = useMutation({
+    ...authQueries.login,
+    onSuccess: () => {
+      navigate(ROUTES.ROOT);
+    },
+  });
+
   const onSubmit = (value: z.infer<typeof formSchema>) => {
     console.log(value);
+    const data = {
+      accountId: value.userId,
+      password: value.userPassword,
+    };
+    mutate(data);
   };
 
   return (
@@ -45,9 +62,13 @@ const SignForm = () => {
             label="Password"
             type="password"
           />
-          <Button type="submit" className=" bg-[#415A77] font-bold">
-            Log In
-          </Button>
+          {isPending ? (
+            <Button>로딩중</Button>
+          ) : (
+            <Button type="submit" className=" bg-[#415A77] font-bold">
+              Log In
+            </Button>
+          )}
           <p className=" text-center text-sm mt-5 font-medium text-[#778DA9]">
             This system is only accessible to the trial staff.
             <br />
