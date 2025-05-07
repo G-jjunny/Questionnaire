@@ -61,11 +61,15 @@ const RegisterForm = () => {
 
           <div className="flex justify-between pt-4">
             {isFirst ? (
-              <Button type="button" onClick={() => navigate(ROUTES.ROOT)}>
+              <Button
+                type="button"
+                variant="secondary"
+                onClick={() => navigate(ROUTES.ROOT)}
+              >
                 Back
               </Button>
             ) : (
-              <Button type="button" onClick={back}>
+              <Button type="button" variant="outline" onClick={back}>
                 Back
               </Button>
             )}
@@ -74,7 +78,11 @@ const RegisterForm = () => {
                 Next
               </Button>
             )}
-            {isLast && <Button type="submit">Submit</Button>}
+            {isLast && (
+              <Button className=" bg-[#778da9]" type="submit">
+                Submit
+              </Button>
+            )}
           </div>
         </form>
       </Form>
