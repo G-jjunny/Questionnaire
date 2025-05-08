@@ -22,11 +22,11 @@ const FirstStep = ({ form }: FirstStepProps) => {
           options={[
             {
               label: "Yes, he/she has received neoadjuvant therapy.",
-              value: "yes",
+              value: "Y",
             },
             {
               label: "No, he/she has not received neoadjuvant therapy.",
-              value: "no",
+              value: "N",
             },
           ]}
         />

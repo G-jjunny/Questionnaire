@@ -11,6 +11,7 @@ import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@/shared/contants/routes";
 import { AlertCircle, Loader2 } from "lucide-react";
 import { Alert, AlertDescription, AlertTitle } from "@/shared/ui/shadcn/alert";
+import { toast } from "sonner";
 
 const SignForm = () => {
   const navigate = useNavigate();
@@ -25,10 +26,17 @@ const SignForm = () => {
   const { mutate, isPending } = useMutation({
     ...authQueries.login,
     onSuccess: () => {
+      toast("Login is Successful!");
       navigate(ROUTES.ROOT);
     },
     onError: (err) => {
-      alert(err.message);
+      toast("Login Failed", {
+        description: err.message,
+        action: {
+          label: "Undo",
+          onClick: () => console.log("undo"),
+        },
+      });
       return (
         <>
           <Alert variant="destructive">

@@ -11,9 +11,21 @@ import ThirdStep from "./ThirdStep";
 import { STEP, stepField, steps } from "../model/type";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@/shared/contants/routes";
+import { useMutation } from "@tanstack/react-query";
+import { registerQueries } from "../api/queries";
+import { useUserStore } from "@/shared/store/useStore";
+import { Loader2 } from "lucide-react";
+import { toast } from "sonner";
 
 const RegisterForm = () => {
   const navigate = useNavigate();
+  const institute = useUserStore((state) => state.user);
+  const { mutate, isPending } = useMutation({
+    mutationFn: registerQueries.register.mutationFn,
+    onSuccess: (res) => {
+      toast(res.message);
+    },
+  });
 
   // 작성한 zod schema object로부터 타입 추론
   const form = useForm<z.infer<typeof registerSchema>>({
@@ -35,7 +47,17 @@ const RegisterForm = () => {
     /** todos :
      * submit 비즈니스 로직 추가
      */
-    console.log(value);
+    const data = {
+      isReceived: value.isReceived,
+      patientId: value.patientId,
+      patientName: value.patientName,
+      isMale: value.isMale,
+      institution: institute?.institution,
+      birthday: value.birthday,
+      operationDate: value.operationDate,
+    };
+    console.log(data);
+    mutate(data);
   };
 
   return (
@@ -78,11 +100,17 @@ const RegisterForm = () => {
                 Next
               </Button>
             )}
-            {isLast && (
-              <Button className=" bg-[#778da9]" type="submit">
-                Submit
-              </Button>
-            )}
+            {isLast &&
+              (isPending ? (
+                <Button disabled>
+                  <Loader2 className=" animate-spin" />
+                  Please wait
+                </Button>
+              ) : (
+                <Button className=" bg-[#778da9]" type="submit">
+                  Submit
+                </Button>
+              ))}
           </div>
         </form>
       </Form>
