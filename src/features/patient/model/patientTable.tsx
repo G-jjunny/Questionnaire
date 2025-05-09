@@ -1,4 +1,5 @@
 import { Checkbox } from "@/shared/ui/shadcn/checkbox";
+import { Label } from "@/shared/ui/shadcn/label";
 import { ColumnDef } from "@tanstack/react-table";
 
 export type PatientType = {
@@ -28,7 +29,11 @@ export const columns: ColumnDef<PatientType>[] = [
   },
   {
     accessorKey: "patientId",
-    header: "환자 ID",
+    header: "Patient ID",
+  },
+  {
+    accessorKey: "patientName",
+    header: "Patient Name",
   },
   {
     accessorKey: "isMale",
@@ -45,15 +50,18 @@ export const columns: ColumnDef<PatientType>[] = [
   {
     id: "select",
     header: ({ table }) => (
-      <Checkbox
-        className="mr-2"
-        checked={
-          table.getIsAllPageRowsSelected() ||
-          (table.getIsSomePageRowsSelected() && "indeterminate")
-        }
-        onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
-        aria-label="Select all"
-      />
+      <Label className="">
+        Drop
+        <Checkbox
+          className="mr-2"
+          checked={
+            table.getIsAllPageRowsSelected() ||
+            (table.getIsSomePageRowsSelected() && "indeterminate")
+          }
+          onCheckedChange={(value) => table.toggleAllPageRowsSelected(!!value)}
+          aria-label="Select all"
+        />
+      </Label>
     ),
     cell: ({ row }) => (
       <Checkbox
@@ -63,7 +71,7 @@ export const columns: ColumnDef<PatientType>[] = [
         aria-label="Select row"
       />
     ),
-    // enableSorting: false,
-    // enableHiding: false,
+    enableSorting: false,
+    enableHiding: false,
   },
 ];

@@ -23,8 +23,11 @@ import { patientQueries } from "../api/queries";
 export const PatientDataTable = () => {
   const institute = useUserStore((state) => state.user);
   const [rowSelection, setRowSelection] = React.useState({});
-  const { data: patients } = useQuery({ ...patientQueries.getPatient });
 
+  // const { data: patients } = useQuery({ ...patientQueries.getPatient });
+  const { data: patients } = useQuery(
+    patientQueries.getPatient(institute?.institution)
+  );
   const table = useReactTable({
     data: patients ?? [],
     columns,

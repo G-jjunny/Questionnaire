@@ -22,7 +22,7 @@ export const useUserStore = create<authStore>()(
       clearUser: () => set({ user: null }),
     }),
     {
-      name: "user-storage", // localStorage에 저장될 key
+      name: "user", // localStorage에 저장될 key
       partialize: (state) => ({ user: state.user }), // 저장할 부분만 선택
     }
   )
