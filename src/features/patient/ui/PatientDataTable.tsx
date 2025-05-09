@@ -26,7 +26,10 @@ export const PatientDataTable = () => {
 
   // const { data: patients } = useQuery({ ...patientQueries.getPatient });
   const { data: patients } = useQuery(
-    patientQueries.getPatient(institute?.institution)
+    patientQueries.getPatient({
+      role: institute?.role,
+      institution: institute?.institution,
+    })
   );
   const table = useReactTable({
     data: patients ?? [],

@@ -1,11 +1,18 @@
+import { GetPatientParams } from "./dto";
 import { patientService } from "./service";
 
 export const patientQueries = {
-  getPatient: (institute?: string) => ({
-    queryKey: ["patients", institute],
-    queryFn: () =>
-      institute === "ADMIN"
-        ? patientService.getPatientAll()
-        : patientService.getPatientsByInstitute(institute!),
+  getPatient: ({ role, institution }: GetPatientParams) => ({
+    queryKey: ["patients", role, institution],
+    queryFn: () => {
+      if (role === "ADMIN") {
+        return patientService.getPatientAll();
+      }
+
+      if (!institution)
+        throw new Error("Institution is undefined for USER role");
+
+      return patientService.getPatientsByInstitute(institution);
+    },
   }),
 };
