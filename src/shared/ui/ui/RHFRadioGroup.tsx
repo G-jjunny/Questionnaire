@@ -15,7 +15,7 @@ interface RHFRadioGroupProps<T extends FieldValues> {
   label?: string | null | ReactNode;
   flex?: boolean;
   options: {
-    label: string;
+    label: string | ReactNode;
     value: string;
   }[];
 }

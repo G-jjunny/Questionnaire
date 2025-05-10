@@ -16,6 +16,7 @@ import { registerQueries } from "../api/queries";
 import { useUserStore } from "@/shared/store/useStore";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
+import Stepper from "./Stepper";
 
 const RegisterForm = () => {
   const navigate = useNavigate();
@@ -62,9 +63,11 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 flex flex-col ">
       {/* todos : 단계별 stepper UI */}
-      {/* <Stepper currentStep={currentStep} steps={steps} />  */}
+      <div className=" lg:w-[400px]">
+        <Stepper currentStep={currentStep} steps={steps} />
+      </div>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit((data) => {

@@ -21,11 +21,21 @@ const FirstStep = ({ form }: FirstStepProps) => {
           name="isReceived"
           options={[
             {
-              label: "Yes, he/she has received neoadjuvant therapy.",
+              label: (
+                <p className="text-lg">
+                  <span className="font-bold">Yes</span> he/she has received
+                  neoadjuvant therapy.
+                </p>
+              ),
               value: "Y",
             },
             {
-              label: "No, he/she has not received neoadjuvant therapy.",
+              label: (
+                <p className="text-lg">
+                  <span className="font-bold">No</span> No, he/she has not
+                  received neoadjuvant therapy.
+                </p>
+              ),
               value: "N",
             },
           ]}
