@@ -41,6 +41,7 @@ export const PatientDataTable = () => {
       rowSelection,
     },
   });
+
   return (
     <>
       <div className="flex justify-center text-xl my-4 ">

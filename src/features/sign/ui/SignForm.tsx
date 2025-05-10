@@ -9,8 +9,7 @@ import { useMutation } from "@tanstack/react-query";
 import { authQueries } from "../api/queries";
 import { useNavigate } from "react-router-dom";
 import { ROUTES } from "@/shared/contants/routes";
-import { AlertCircle, Loader2 } from "lucide-react";
-import { Alert, AlertDescription, AlertTitle } from "@/shared/ui/shadcn/alert";
+import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 
 const SignForm = () => {
@@ -25,32 +24,16 @@ const SignForm = () => {
 
   const { mutate, isPending } = useMutation({
     ...authQueries.login,
-    onSuccess: () => {
-      toast("Login is Successful!");
+    onSuccess: (res) => {
+      toast.success(`${res.message}`);
       navigate(ROUTES.ROOT);
     },
     onError: (err) => {
-      toast("Login Failed", {
-        description: err.message,
-        action: {
-          label: "Undo",
-          onClick: () => console.log("undo"),
-        },
-      });
-      return (
-        <>
-          <Alert variant="destructive">
-            <AlertCircle className="h-4 w-4" />
-            <AlertTitle>Error</AlertTitle>
-            <AlertDescription>{err.message}</AlertDescription>
-          </Alert>
-        </>
-      );
+      toast.error(err.message);
     },
   });
 
   const onSubmit = (value: z.infer<typeof formSchema>) => {
-    console.log(value);
     const data = {
       accountId: value.userId,
       password: value.userPassword,

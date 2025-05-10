@@ -1,5 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import axios from "axios";
+import { errorInterceptor, responseInterceptor } from "./intetceptors";
 
 const axiosInstance = axios.create({
   baseURL: import.meta.env.VITE_API_BASE_URL,
@@ -7,6 +8,8 @@ const axiosInstance = axios.create({
   headers: { "Content-Type": "application/json" },
   withCredentials: true,
 });
+
+axiosInstance.interceptors.response.use(responseInterceptor, errorInterceptor);
 
 export const apiClient = {
   get: <T>(url: string, params?: any) =>
