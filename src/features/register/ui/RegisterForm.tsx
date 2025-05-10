@@ -17,6 +17,7 @@ import { useUserStore } from "@/shared/store/useStore";
 import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import Stepper from "./Stepper";
+import { Card } from "@/shared/ui/shadcn/card";
 
 const RegisterForm = () => {
   const navigate = useNavigate();
@@ -58,66 +59,69 @@ const RegisterForm = () => {
       birthday: value.birthday,
       operationDate: value.operationDate,
     };
-    console.log(data);
     mutate(data);
   };
 
   return (
     <div className="space-y-4 flex flex-col ">
       {/* todos : 단계별 stepper UI */}
-      <div className=" lg:w-[400px]">
-        <Stepper currentStep={currentStep} steps={steps} />
-      </div>
-      <Form {...form}>
-        <form
-          onSubmit={form.handleSubmit((data) => {
-            if (!isLast) {
-              console.log(data);
-              next();
-            } else {
-              onSubmit(data);
-            }
-          })}
-          className="space-y-4"
-        >
-          {/* 단계별 form 스텝 */}
-          {currentStep === STEP.FIRST && <FirstStep form={form} />}
-          {currentStep === STEP.SECOND && <SecondStep form={form} />}
-          {currentStep === STEP.THIRD && <ThirdStep form={form} />}
+      <Stepper currentStep={currentStep} steps={steps} />
+      <Card className="p-4 w-fit">
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit((data) => {
+              if (!isLast) {
+                console.log(data);
+                next();
+              } else {
+                onSubmit(data);
+              }
+            })}
+            className="space-y-4"
+          >
+            {/* 단계별 form 스텝 */}
+            {currentStep === STEP.FIRST && <FirstStep form={form} />}
+            {currentStep === STEP.SECOND && <SecondStep form={form} />}
+            {currentStep === STEP.THIRD && <ThirdStep form={form} />}
 
-          <div className="flex justify-between pt-4">
-            {isFirst ? (
-              <Button
-                type="button"
-                variant="secondary"
-                onClick={() => navigate(ROUTES.ROOT)}
-              >
-                Back
-              </Button>
-            ) : (
-              <Button type="button" variant="outline" onClick={back}>
-                Back
-              </Button>
-            )}
-            {!isLast && (
-              <Button type="button" onClick={handleNext}>
-                Next
-              </Button>
-            )}
-            {isLast &&
-              (isPending ? (
-                <Button disabled>
-                  <Loader2 className=" animate-spin" />
-                  Please wait
+            <div className="flex justify-between pt-4">
+              {isFirst ? (
+                <Button
+                  type="button"
+                  variant="secondary"
+                  onClick={() => navigate(ROUTES.ROOT)}
+                >
+                  Back
                 </Button>
               ) : (
-                <Button className=" bg-[#778da9]" type="submit">
-                  Submit
+                <Button type="button" variant="outline" onClick={back}>
+                  Back
                 </Button>
-              ))}
-          </div>
-        </form>
-      </Form>
+              )}
+              {!isLast && (
+                <Button
+                  type="button"
+                  onClick={handleNext}
+                  className="bg-[#415a77] hover:bg-[#778da9]"
+                >
+                  Next
+                </Button>
+              )}
+              {isLast &&
+                (isPending ? (
+                  <Button disabled>
+                    <Loader2 className=" animate-spin" />
+                    Please wait
+                  </Button>
+                ) : (
+                  <Button className=" bg-[#778da9]" type="submit">
+                    Submit
+                  </Button>
+                ))}
+            </div>
+          </form>
+        </Form>
+      </Card>
     </div>
   );
 };
