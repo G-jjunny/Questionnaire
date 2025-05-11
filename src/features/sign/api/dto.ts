@@ -5,6 +5,8 @@ export interface LoginDTO {
 
 export interface LoginResponseDTO {
   message: string;
+  code?: number;
+  state?: boolean;
   user: {
     id: number;
     accountId: string;

@@ -1,4 +1,4 @@
-import { PatientType } from "../ui/PatientDataTable";
+import { PatientType } from "./patientTable";
 
 export const mockData: PatientType[] = [
   {
