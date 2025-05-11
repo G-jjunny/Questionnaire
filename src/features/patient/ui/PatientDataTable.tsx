@@ -42,7 +42,7 @@ export const PatientDataTable = () => {
     },
   });
   /** drop 체크 핸들러 */
-  const handleSave = () => {};
+  // const handleSave = () => {};
 
   return (
     <>
