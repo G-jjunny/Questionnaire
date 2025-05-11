@@ -63,10 +63,10 @@ const RegisterForm = () => {
   };
 
   return (
-    <div className="space-y-4 flex flex-col ">
+    <div className="flex flex-col gap-4 w-full items-center">
       {/* todos : 단계별 stepper UI */}
       <Stepper currentStep={currentStep} steps={steps} />
-      <Card className="p-4 w-fit">
+      <Card className="p-4 max-w-2xl w-full ">
         <Form {...form}>
           <form
             onSubmit={form.handleSubmit((data) => {
@@ -84,7 +84,7 @@ const RegisterForm = () => {
             {currentStep === STEP.SECOND && <SecondStep form={form} />}
             {currentStep === STEP.THIRD && <ThirdStep form={form} />}
 
-            <div className="flex justify-between pt-4">
+            <div className="flex justify-between">
               {isFirst ? (
                 <Button
                   type="button"
@@ -92,6 +92,10 @@ const RegisterForm = () => {
                   onClick={() => navigate(ROUTES.ROOT)}
                 >
                   Back
+                </Button>
+              ) : isLast ? (
+                <Button type="button" variant="outline" onClick={back}>
+                  Edit
                 </Button>
               ) : (
                 <Button type="button" variant="outline" onClick={back}>
@@ -114,7 +118,10 @@ const RegisterForm = () => {
                     Please wait
                   </Button>
                 ) : (
-                  <Button className=" bg-[#778da9]" type="submit">
+                  <Button
+                    className=" bg-[#415a77] hover:bg-[#778da9]"
+                    type="submit"
+                  >
                     Submit
                   </Button>
                 ))}

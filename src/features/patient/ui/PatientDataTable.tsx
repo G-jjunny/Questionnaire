@@ -41,6 +41,8 @@ export const PatientDataTable = () => {
       rowSelection,
     },
   });
+  /** drop 체크 핸들러 */
+  const handleSave = () => {};
 
   return (
     <>
@@ -110,6 +112,14 @@ export const PatientDataTable = () => {
             {table.getFilteredSelectedRowModel().rows.length} of{" "}
             {table.getFilteredRowModel().rows.length} row(s) selected.
           </div>
+          {institute?.role === "ADMIN" && (
+            <Button
+              variant="outline"
+              className=" bg-emerald-700 hover:bg-emerald-500 text-white"
+            >
+              Download
+            </Button>
+          )}
           <Button
             variant="outline"
             size="sm"
