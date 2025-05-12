@@ -10,8 +10,9 @@ export type PatientType = {
   isMale: string;
   birthday: string;
   operationDate: string;
-  institution: string | null;
-  //   drop: boolean;
+  institution: string;
+  droped?: boolean;
+  group?: string;
 };
 
 export const columns: ColumnDef<PatientType>[] = [
@@ -49,8 +50,9 @@ export const columns: ColumnDef<PatientType>[] = [
   },
   {
     id: "select",
+    accessorKey: "droped",
     header: ({ table }) => (
-      <Label className="">
+      <Label className="text-xs font-bold">
         Drop
         <Checkbox
           className="mr-2"
@@ -63,14 +65,20 @@ export const columns: ColumnDef<PatientType>[] = [
         />
       </Label>
     ),
-    cell: ({ row }) => (
-      <Checkbox
-        className="mr-2"
-        checked={row.getIsSelected()}
-        onCheckedChange={(value) => row.toggleSelected(!!value)}
-        aria-label="Select row"
-      />
-    ),
+    cell: ({ row }) => {
+      const droped = row.original.droped;
+
+      return (
+        <Checkbox
+          className="mr-2"
+          disabled={droped}
+          checked={!droped ? row.getIsSelected() : true}
+          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          aria-label="Select row"
+        />
+      );
+    },
+
     enableSorting: false,
     enableHiding: false,
   },

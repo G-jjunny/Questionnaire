@@ -16,15 +16,24 @@ import {
 import { Button } from "@/shared/ui/shadcn/button";
 import { columns } from "../model/patientTable";
 import { useUserStore } from "@/shared/store/useStore";
-import React from "react";
-import { useQuery } from "@tanstack/react-query";
+import React, { useEffect } from "react";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { patientQueries } from "../api/queries";
+import { toast } from "sonner";
+import { handleExcel } from "../model/handleExcel";
 
 export const PatientDataTable = () => {
   const institute = useUserStore((state) => state.user);
-  const [rowSelection, setRowSelection] = React.useState({});
+  const [rowSelection, setRowSelection] = React.useState<
+    Record<string, boolean>
+  >({});
+  const { mutate } = useMutation({
+    ...patientQueries.patchDropPatient(),
+    onSuccess: (res) => {
+      toast.success(`${res}`);
+    },
+  });
 
-  // const { data: patients } = useQuery({ ...patientQueries.getPatient });
   const { data: patients } = useQuery(
     patientQueries.getPatient({
       role: institute?.role,
@@ -40,9 +49,25 @@ export const PatientDataTable = () => {
     state: {
       rowSelection,
     },
+    enableRowSelection: true,
+    getRowId: (row) => row.patientId,
   });
   /** drop 체크 핸들러 */
-  // const handleSave = () => {};
+  const handleSave = () => {
+    if (!patients) return;
+
+    const selectedPatientIds = Object.keys(rowSelection);
+
+    if (selectedPatientIds.length > 0) {
+      mutate(selectedPatientIds); // mutate에 선택된 patientId 배열 넘기기
+    } else {
+      toast.error("Please select at least one patient to drop.");
+    }
+  };
+
+  useEffect(() => {
+    console.log(rowSelection);
+  }, [rowSelection]);
 
   return (
     <>
@@ -116,6 +141,13 @@ export const PatientDataTable = () => {
             <Button
               variant="outline"
               className=" bg-emerald-700 hover:bg-emerald-500 text-white"
+              onClick={() => {
+                if (patients) {
+                  handleExcel(patients);
+                } else {
+                  toast.error("환자 데이터를 불러오지 못했습니다.");
+                }
+              }}
             >
               Download
             </Button>
@@ -132,6 +164,7 @@ export const PatientDataTable = () => {
           <Button
             size="sm"
             variant="outline"
+            onClick={handleSave}
             className=" bg-amber-200 hover:bg-amber-500"
           >
             Save

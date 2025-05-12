@@ -9,3 +9,6 @@ export interface GetPatientParams {
   role?: string;
   institution?: string;
 }
+export interface PatchPatientResponseDTO {
+  message: string;
+}

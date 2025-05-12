@@ -1,3 +1,4 @@
+import { QUERY_KEYS } from "@/shared/api/queryKey";
 import { GetPatientParams } from "./dto";
 import { patientService } from "./service";
 
@@ -14,5 +15,9 @@ export const patientQueries = {
 
       return patientService.getPatientsByInstitute(institution);
     },
+  }),
+  patchDropPatient: () => ({
+    mutationKey: [QUERY_KEYS.patient.base, "drop"],
+    mutationFn: patientService.patchDropPatient,
   }),
 };
