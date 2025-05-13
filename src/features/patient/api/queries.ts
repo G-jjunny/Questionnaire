@@ -20,4 +20,7 @@ export const patientQueries = {
     mutationKey: [QUERY_KEYS.patient.base, "drop"],
     mutationFn: patientService.patchDropPatient,
   }),
+  putEditPatient: {
+    mutationFn: patientService.putEditPatient,
+  },
 };
