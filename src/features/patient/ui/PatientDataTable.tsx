@@ -14,13 +14,14 @@ import {
   TableRow,
 } from "@/shared/ui/shadcn/table";
 import { Button } from "@/shared/ui/shadcn/button";
-import { columns } from "../model/patientTable";
 import { useUserStore } from "@/shared/store/useStore";
 import React, { useEffect } from "react";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { patientQueries } from "../api/queries";
 import { toast } from "sonner";
 import { handleExcel } from "../model/handleExcel";
+import { getColumns } from "../model/patientTable";
+import PatientEdit from "./PatientEdit";
 
 export const PatientDataTable = () => {
   const institute = useUserStore((state) => state.user);
@@ -41,9 +42,12 @@ export const PatientDataTable = () => {
       institution: institute?.institution,
     })
   );
+
+  const columns = getColumns(institute?.role);
+
   const table = useReactTable({
     data: patients ?? [],
-    columns,
+    columns: columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),
     onRowSelectionChange: setRowSelection,
@@ -65,11 +69,10 @@ export const PatientDataTable = () => {
       toast.error("Please select at least one patient to drop.");
     }
   };
-
   useEffect(() => {
     console.log(rowSelection);
+    console.log();
   }, [rowSelection]);
-
   return (
     <>
       <div className="flex justify-center text-xl my-4 ">
@@ -105,22 +108,43 @@ export const PatientDataTable = () => {
           </TableHeader>
           <TableBody>
             {table.getRowModel().rows?.length ? (
-              table.getRowModel().rows.map((row) => (
-                <TableRow
-                  key={row.id}
-                  data-state={row.getIsSelected() && "selected"}
-                  className=" text-center"
-                >
-                  {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
-                      {flexRender(
-                        cell.column.columnDef.cell,
-                        cell.getContext()
-                      )}
-                    </TableCell>
-                  ))}
-                </TableRow>
-              ))
+              table.getRowModel().rows.map((row) =>
+                institute?.role === "ADMIN" ? (
+                  // {/* // <EditToolTip patient={row.original} key={row.id}> */}
+                  <PatientEdit patient={row.original} key={row.id}>
+                    <TableRow
+                      // key={row.id}
+                      data-state={row.getIsSelected() && "selected"}
+                      className=" text-center"
+                    >
+                      {row.getVisibleCells().map((cell) => (
+                        <TableCell key={cell.id}>
+                          {flexRender(
+                            cell.column.columnDef.cell,
+                            cell.getContext()
+                          )}
+                        </TableCell>
+                      ))}
+                    </TableRow>
+                  </PatientEdit>
+                ) : (
+                  // {/* // </EditToolTip> */}
+                  <TableRow
+                    key={row.id}
+                    data-state={row.getIsSelected() && "selected"}
+                    className=" text-center"
+                  >
+                    {row.getVisibleCells().map((cell) => (
+                      <TableCell key={cell.id}>
+                        {flexRender(
+                          cell.column.columnDef.cell,
+                          cell.getContext()
+                        )}
+                      </TableCell>
+                    ))}
+                  </TableRow>
+                )
+              )
             ) : (
               <TableRow>
                 <TableCell

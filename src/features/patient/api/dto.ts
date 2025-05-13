@@ -12,3 +12,7 @@ export interface GetPatientParams {
 export interface PatchPatientResponseDTO {
   message: string;
 }
+
+// export interface PutEditPatientDTO {
+
+// }

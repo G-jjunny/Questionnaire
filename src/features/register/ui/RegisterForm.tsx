@@ -4,7 +4,6 @@ import SecondStep from "./SecondStep";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import registerSchema from "../model/schema";
 import useStepForm from "../model/useStepForm";
 import { Button } from "@/shared/ui/shadcn/button";
 import ThirdStep from "./ThirdStep";
@@ -18,6 +17,7 @@ import { Loader2 } from "lucide-react";
 import { toast } from "sonner";
 import Stepper from "./Stepper";
 import { Card } from "@/shared/ui/shadcn/card";
+import { registerSchema } from "../model/schema";
 
 const RegisterForm = () => {
   const navigate = useNavigate();

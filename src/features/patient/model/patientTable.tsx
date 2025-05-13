@@ -15,7 +15,7 @@ export type PatientType = {
   group?: string;
 };
 
-export const columns: ColumnDef<PatientType>[] = [
+export const getColumns = (role?: string): ColumnDef<PatientType>[] => [
   {
     header: "No",
     cell: ({ row }) => row.index + 1,
@@ -67,18 +67,25 @@ export const columns: ColumnDef<PatientType>[] = [
     ),
     cell: ({ row }) => {
       const droped = row.original.droped;
+      const isDisabled = droped && role !== "ADMIN";
 
+      const isAdmin = role === "ADMIN";
       return (
         <Checkbox
           className="mr-2"
-          disabled={droped}
-          checked={!droped ? row.getIsSelected() : true}
-          onCheckedChange={(value) => row.toggleSelected(!!value)}
+          disabled={isDisabled}
+          checked={droped || row.getIsSelected()}
+          onClick={(e) => e.stopPropagation()} // 클릭 이벤트 버블링 방지
+          onCheckedChange={(value) => {
+            // ADMIN이면 선택 변경 허용
+            if (isAdmin || !droped) {
+              row.toggleSelected(!!value);
+            }
+          }}
           aria-label="Select row"
         />
       );
     },
-
     enableSorting: false,
     enableHiding: false,
   },
