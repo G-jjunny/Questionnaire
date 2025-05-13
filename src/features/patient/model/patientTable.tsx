@@ -12,7 +12,7 @@ export type PatientType = {
   operationDate: string;
   institution: string;
   droped?: boolean;
-  group?: string;
+  group?: string | null;
 };
 
 export const getColumns = (role?: string): ColumnDef<PatientType>[] => [

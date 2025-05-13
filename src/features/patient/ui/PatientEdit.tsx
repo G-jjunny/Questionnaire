@@ -9,14 +9,16 @@ import {
 } from "@/shared/ui/shadcn/dialog";
 import { PropsWithChildren, ReactNode, useEffect, useState } from "react";
 import { PatientType } from "../model/patientTable";
-import { Label } from "@/shared/ui/shadcn/label";
-import { Input } from "@/shared/ui/shadcn/input";
 import { Button } from "@/shared/ui/shadcn/button";
-import { Form, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { editSchema } from "@/features/register/model/schema";
 import EditForm from "./EditForm";
+import { Form } from "@/shared/ui/shadcn/form";
+import { useMutation } from "@tanstack/react-query";
+import { patientQueries } from "../api/queries";
+import { toast } from "sonner";
 
 interface PatientEditProps extends PropsWithChildren {
   patient: PatientType;
@@ -24,25 +26,56 @@ interface PatientEditProps extends PropsWithChildren {
 }
 
 const PatientEdit = ({ patient, children }: PatientEditProps) => {
-  const [patientData, setPatientData] = useState(patient);
-
+  const [isOpen, setIsOpen] = useState(false);
   const form = useForm<z.infer<typeof editSchema>>({
     resolver: zodResolver(editSchema),
+    defaultValues: {
+      patientId: patient.patientId,
+      patientName: patient.patientName,
+      isMale: patient.isMale,
+      birthday: patient.birthday,
+      operationDate: patient.operationDate,
+    },
   });
 
-  // const handleChageInput = (e: React.ChangeEvent<HTMLInputElement>) => {
-  //   setPatientData((prev) => ({
-  //     ...prev,
-  //     [name]: value,
-  //   }));
-  // };
+  const { mutate } = useMutation({
+    ...patientQueries.putEditPatient,
+    onSuccess: (res) => {
+      toast.success(`${res.message}`);
+      setIsOpen(false);
+    },
+  });
 
   useEffect(() => {
-    console.log(patientData);
-  }, [patientData]);
+    if (isOpen) {
+      form.reset({
+        patientId: patient.patientId,
+        patientName: patient.patientName,
+        isMale: patient.isMale,
+        birthday: patient.birthday,
+        operationDate: patient.operationDate,
+      });
+    }
+  }, [isOpen, patient]);
+
+  const onSubmit = (value: z.infer<typeof editSchema>) => {
+    const newPatient = {
+      isReceived: patient.isReceived,
+      patientId: value.patientId,
+      patientName: value.patientName,
+      isMale: value.isMale,
+      birthday: value.birthday,
+      operationDate: value.operationDate,
+      institution: patient.institution,
+      group: patient.group || undefined,
+      droped: patient.droped,
+    };
+    console.log(newPatient);
+    mutate(newPatient);
+  };
 
   return (
-    <Dialog>
+    <Dialog open={isOpen} onOpenChange={setIsOpen}>
       <DialogTrigger className="cursor-pointer" asChild>
         {children}
       </DialogTrigger>
@@ -50,75 +83,30 @@ const PatientEdit = ({ patient, children }: PatientEditProps) => {
         <DialogHeader>
           <DialogTitle>Edit Data</DialogTitle>
           <DialogDescription>
-            Make changes to patient data here. <br />
-            Click save when you're done.
+            Make changes to patient data here. Click save when you're done.
           </DialogDescription>
         </DialogHeader>
-        {/* <div className="grid gap-4 py-4">
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="patientId" className="text-right">
-              Patient Id
-            </Label>
-            <Input
-              id="patientId"
-              name="patientId"
-              value={patientData.patientId}
-              onChange={handleChageInput}
-              className="col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="patientName" className="text-right">
-              Name
-            </Label>
-            <Input
-              id="patientName"
-              value={patientData.patientName}
-              className="col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="isMale" className="text-right">
-              Sex
-            </Label>
-            <Input
-              id="isMale"
-              disabled
-              value={patientData.isMale}
-              className="col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="birthday" className="text-right">
-              Birthday
-            </Label>
-            <Input
-              id="birthday"
-              type="date"
-              value={patientData.birthday}
-              className="col-span-3"
-            />
-          </div>
-          <div className="grid grid-cols-4 items-center gap-4">
-            <Label htmlFor="operationDate" className="text-right">
-              OperationDate
-            </Label>
-            <Input
-              id="operationDate"
-              type="date"
-              value={patientData.operationDate}
-              className="col-span-3"
-            />
-          </div>
-        </div> */}
-        {/* <Form {...form}>
-          <form onSubmit={form.handleSubmit(() => console.log("submit"))}>
+
+        <Form {...form}>
+          <form
+            onSubmit={form.handleSubmit((data) => {
+              onSubmit(data);
+            })}
+          >
             <EditForm form={form} />
+            <DialogFooter className=" w-full mt-4">
+              <Button
+                type="button"
+                className=" mr-auto"
+                variant="secondary"
+                onClick={() => setIsOpen(false)}
+              >
+                Cancel
+              </Button>
+              <Button type="submit">Save changes</Button>
+            </DialogFooter>
           </form>
-        </Form> */}
-        <DialogFooter>
-          {/* <Button type="submit">Save changes</Button> */}
-        </DialogFooter>
+        </Form>
       </DialogContent>
     </Dialog>
   );

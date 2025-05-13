@@ -8,8 +8,10 @@ const patientSchema = z.object({
     .string()
     .min(1, { message: "patientName contain at least 1 character(s)" }),
   isMale: z.string(),
-  birthday: z.string(),
-  operationDate: z.string(),
+  birthday: z.string().min(1, { message: "" }),
+  operationDate: z.string().min(1, {
+    message: "",
+  }),
 });
 
 export const registerSchema = patientSchema.extend({

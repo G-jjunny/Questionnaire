@@ -14,6 +14,7 @@ const EditForm = ({ form }: EditFormProps) => {
       <div className="flex flex-col gap-6 mb-4">
         <RHFInput
           form={form}
+          disabled
           label="Patient ID"
           name="patientId"
           placeholder="Patient Id"
@@ -53,9 +54,6 @@ const EditForm = ({ form }: EditFormProps) => {
           className="flex justify-between"
         />
       </div>
-      <h2 className="text-md text-center text-[#415A77]">
-        After entering the data, click “Next”.
-      </h2>
     </>
   );
 };

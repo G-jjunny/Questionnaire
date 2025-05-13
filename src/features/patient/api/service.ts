@@ -3,8 +3,8 @@ import {
   PatchPatientResponseDTO,
   patientResponseDTO,
   PutEditPatientDTO,
+  PutEditResponseDTO,
 } from "./dto";
-import { PatientType } from "../model/patientTable";
 
 export const patientService = {
   /** 전체 환자 리스트 조회 */
@@ -33,11 +33,11 @@ export const patientService = {
     return response;
   },
 
-  putEditPatient: async (params: string, data: PatientType) => {
-    const respose = await apiClient.put<PutEditPatientDTO>(
-      `/edit/${params}`,
+  putEditPatient: async (data: PutEditPatientDTO) => {
+    const response = await apiClient.put<PutEditResponseDTO>(
+      `/update/${data.patientId}`,
       data
     );
-    return respose;
+    return response;
   },
 };

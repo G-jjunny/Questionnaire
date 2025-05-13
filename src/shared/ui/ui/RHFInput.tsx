@@ -15,6 +15,7 @@ interface RHFInputProps<T extends FieldValues> {
   label: string;
   type: string;
   className?: string;
+  disabled?: boolean;
 }
 
 const RHFInput = <T extends FieldValues>({
@@ -24,6 +25,7 @@ const RHFInput = <T extends FieldValues>({
   label,
   type,
   className = "",
+  disabled = false,
 }: RHFInputProps<T>) => {
   return (
     <FormField
@@ -36,6 +38,7 @@ const RHFInput = <T extends FieldValues>({
             <FormControl>
               <Input
                 type={type}
+                disabled={disabled}
                 placeholder={placeholder}
                 {...field}
                 className={className}
