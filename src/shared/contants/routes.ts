@@ -2,7 +2,10 @@ export const ROUTES = {
   // private
   ROOT: "/",
   REGISTER: "/register",
-  LIST: "/enrollmentlist",
+  LIST: {
+    BASE: "/enrollmentlist",
+    Detail: (patientId: string) => `/enrollmentlist/${patientId}`,
+  },
 
   ADMIN: "/admin",
 

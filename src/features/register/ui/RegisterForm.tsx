@@ -26,7 +26,7 @@ const RegisterForm = () => {
     mutationFn: registerQueries.register.mutationFn,
     onSuccess: (res) => {
       toast(res.message);
-      navigate(ROUTES.LIST);
+      navigate(ROUTES.LIST.BASE);
     },
   });
 

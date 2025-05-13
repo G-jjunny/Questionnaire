@@ -23,7 +23,7 @@ const HomePage = () => {
         <Button
           variant="link"
           className="h-[100px] bg-[#415A77] font-bold text-md text-white cursor-pointer"
-          onClick={() => navigate(ROUTES.LIST)}
+          onClick={() => navigate(ROUTES.LIST.BASE)}
         >
           Enrollment
           <br />

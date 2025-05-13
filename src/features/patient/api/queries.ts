@@ -4,7 +4,7 @@ import { patientService } from "./service";
 
 export const patientQueries = {
   getPatient: ({ role, institution }: GetPatientParams) => ({
-    queryKey: ["patients", role, institution],
+    queryKey: [QUERY_KEYS.patient.base, role, institution],
     queryFn: () => {
       if (role === "ADMIN") {
         return patientService.getPatientAll();

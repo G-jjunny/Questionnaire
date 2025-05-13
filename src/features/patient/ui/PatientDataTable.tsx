@@ -30,11 +30,12 @@ export const PatientDataTable = () => {
   const { mutate } = useMutation({
     ...patientQueries.patchDropPatient(),
     onSuccess: (res) => {
-      toast.success(`${res}`);
+      toast.success(`${res.message}`);
+      refetch();
     },
   });
 
-  const { data: patients } = useQuery(
+  const { data: patients, refetch } = useQuery(
     patientQueries.getPatient({
       role: institute?.role,
       institution: institute?.institution,
