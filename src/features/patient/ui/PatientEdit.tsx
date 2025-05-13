@@ -50,7 +50,8 @@ const PatientEdit = ({ patient, children }: PatientEditProps) => {
         <DialogHeader>
           <DialogTitle>Edit Data</DialogTitle>
           <DialogDescription>
-            Make changes to patient data here. Click save when you're done.
+            Make changes to patient data here. <br />
+            Click save when you're done.
           </DialogDescription>
         </DialogHeader>
         {/* <div className="grid gap-4 py-4">
@@ -110,11 +111,11 @@ const PatientEdit = ({ patient, children }: PatientEditProps) => {
             />
           </div>
         </div> */}
-        <Form {...form}>
+        {/* <Form {...form}>
           <form onSubmit={form.handleSubmit(() => console.log("submit"))}>
             <EditForm form={form} />
           </form>
-        </Form>
+        </Form> */}
         <DialogFooter>
           {/* <Button type="submit">Save changes</Button> */}
         </DialogFooter>

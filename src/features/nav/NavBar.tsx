@@ -4,7 +4,6 @@ import { Button } from "@/shared/ui/shadcn/button";
 import {
   Tooltip,
   TooltipContent,
-  TooltipProvider,
   TooltipTrigger,
 } from "@/shared/ui/shadcn/tooltip";
 import { HomeIcon } from "lucide-react";
@@ -27,21 +26,19 @@ const NavBar = () => {
         >
           <HomeIcon size={25} color="#fff" />
         </Button>
-        <TooltipProvider>
-          <Tooltip>
-            <TooltipTrigger>
-              <Button
-                className="bg-[#415a77] hover:underline"
-                onClick={handleLogout}
-              >
-                Log Out
-              </Button>
-              <TooltipContent>
-                <p>{user?.accountId}</p>
-              </TooltipContent>
-            </TooltipTrigger>
-          </Tooltip>
-        </TooltipProvider>
+        <Tooltip>
+          <TooltipTrigger asChild>
+            <Button
+              className="bg-[#415a77] hover:underline"
+              onClick={handleLogout}
+            >
+              Log Out
+            </Button>
+          </TooltipTrigger>
+          <TooltipContent>
+            <p>{user?.accountId}</p>
+          </TooltipContent>
+        </Tooltip>
       </div>
     </div>
   );

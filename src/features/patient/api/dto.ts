@@ -13,6 +13,6 @@ export interface PatchPatientResponseDTO {
   message: string;
 }
 
-// export interface PutEditPatientDTO {
-
-// }
+export interface PutEditPatientDTO extends PatientType {
+  message: string;
+}
