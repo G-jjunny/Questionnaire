@@ -22,7 +22,7 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: ROUTES.LIST, // 기존 환자군 리스트 라우터
+        path: ROUTES.LIST.BASE, // 기존 환자군 리스트 라우터
         element: <EnrollmentList />,
       },
       {
