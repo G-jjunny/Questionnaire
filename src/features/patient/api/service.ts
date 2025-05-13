@@ -1,5 +1,5 @@
 import { apiClient } from "@/shared/api/apiClient";
-import { patientResponseDTO } from "./dto";
+import { PatchPatientResponseDTO, patientResponseDTO } from "./dto";
 
 export const patientService = {
   getPatientAll: async (): Promise<patientResponseDTO[]> => {
@@ -13,6 +13,13 @@ export const patientService = {
       `/patient/${params}`
     );
 
+    return response;
+  },
+  patchDropPatient: async (ids: string[]): Promise<PatchPatientResponseDTO> => {
+    const response = await apiClient.patch<PatchPatientResponseDTO>(
+      "/patient/drop",
+      { ids }
+    );
     return response;
   },
 };

@@ -1,9 +1,10 @@
+import { QUERY_KEYS } from "@/shared/api/queryKey";
 import { GetPatientParams } from "./dto";
 import { patientService } from "./service";
 
 export const patientQueries = {
   getPatient: ({ role, institution }: GetPatientParams) => ({
-    queryKey: ["patients", role, institution],
+    queryKey: [QUERY_KEYS.patient.base, role, institution],
     queryFn: () => {
       if (role === "ADMIN") {
         return patientService.getPatientAll();
@@ -14,5 +15,9 @@ export const patientQueries = {
 
       return patientService.getPatientsByInstitute(institution);
     },
+  }),
+  patchDropPatient: () => ({
+    mutationKey: [QUERY_KEYS.patient.base, "drop"],
+    mutationFn: patientService.patchDropPatient,
   }),
 };
