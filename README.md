@@ -1,54 +1,44 @@
-# React + TypeScript + Vite
+# 🏥 Foreign Patient Group Management Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+이 프로젝트는 삼성 서울 병원 및 다양한 기관에서 외국인 환자 데이터를 효율적으로 수집·관리할 수 있는 **외국인 환자 그룹 배정 관리 시스템**의 프론트엔드입니다. 사용자는 소속 기관에 따라 역할 기반으로 데이터를 조회·수정·삭제할 수 있으며, 관리자(ADMIN)는 전체 데이터를 조회, 수정, 엑셀 파일로 다운로드할 수 있습니다.
 
-Currently, two official plugins are available:
+## 🚀 프로젝트 개요
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- **프로젝트명**: Foreign Patient Group Management System
+- **목적**: 병원 연구소에서 외국인 환자 그룹 데이터를 통합적으로 관리할 수 있도록 기관별 접근 제어와 Excel 내보내기를 포함한 웹 인터페이스 제공
+- **역할 기반 권한 제어**:
+  - `ADMIN`: 전체 환자 목록 조회 및 Excel 다운로드 가능
+  - `USER`: 소속 기관에 해당하는 환자만 조회/수정 가능
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## ⚙️ 사용 기술 스택
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+### 🖼️ Frontend
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+| 기술                             | 설명                                                                 |
+| -------------------------------- | -------------------------------------------------------------------- |
+| **React**                        | 컴포넌트 기반 UI 개발을 위해 선정                                    |
+| **TypeScript**                   | 정적 타입 지원으로 코드 안정성                                       |
+| **Vite**                         | 빠른 개발 환경과 빌드 성능을 제공하는 번들러                         |
+| **Zustand**                      | 간단하고 가벼운 글로벌 상태 관리를 하기위해 선정                     |
+| **TanStack Query (React Query)** | 서버 상태와 캐싱을 효율적으로 처리하기 위해 선정                     |
+| **ShadCN / Tailwind CSS**        | 접근성 있고 재사용 가능한 UI 컴포넌트 + 유틸리티 기반 CSS 프레임워크 |
+| **React Hook Form + Zod**        | 폼 상태 관리 및 정적 타입 기반의 유효성 검증 처리를 하기위해 선정    |
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## 📦 기술 스택 선택 이유
+
+- **React + TypeScript**: 컴포넌트 재사용성과 유지보수 측면에서 최적. 타입 안정성으로 디버깅 시간 절감.
+- **Vite**: 빠른 로컬 개발 환경 구축 및 빌드 속도 개선.
+- **Zustand**: Context API나 Redux에 비해 설정이 단순하고 직관적임.
+- **TanStack Query**: API 요청 상태, 캐싱, 리페칭 처리에 최적화된 솔루션.
+- **ShadCN + Tailwind CSS**: 반응형 UI를 빠르게 개발 가능하며 디자인 시스템 구성에 용이.
+- **React Hook Form + Zod**: 유효성 검사를 선언적으로 처리할 수 있음
+
+---
+
+<!--
+## 📂 폴더 구조
+### FSD 아키텍처 -->
