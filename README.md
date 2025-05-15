@@ -5,7 +5,7 @@
 
 ## 🔗 프로젝트 링크
 - **배포 주소** : [https://stratification-tool.netlify.app](https://stratification-tool.netlify.app)
-
+- **연동 백엔드** : [Foreign Patient Management Backend](https://github.com/G-jjunny/Stratification-Tool)
 ---
   
 ## 🚀 프로젝트 개요
