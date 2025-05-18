@@ -16,6 +16,8 @@ const patientSchema = z.object({
 
 export const registerSchema = patientSchema.extend({
   isReceived: z.string().min(1), // 등록시에만 필요
+  group: z.string(),
+  serialNum: z.string(),
 });
 
 export const editSchema = patientSchema; // 수정에는 불필요
