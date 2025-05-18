@@ -34,17 +34,23 @@ const ThirdStep = ({ form }: ThirdStepProps) => {
           <InfoItem label="Is Received" value={values.isReceived} />
           <InfoItem label="Birthday" value={values.birthday} />
           <InfoItem label="Operation Date" value={values.operationDate} />
-        </div>
-        <div className="flex flex-row text-lg font-bold ">
-          <div className=" w-full">Group</div>
-          <div className=" w-full">
-            {isLoading ? "Assigning..." : data?.group}
+          <div className="flex flex-row text-lg font-bold ">
+            <div className=" w-full text-center p-2 bg-[#1b263b] rounded-bl-md rounded-tl-md text-white">
+              Group
+            </div>
+            <div className=" w-full text-center p-2 rounded-br-md rounded-tr-md bg-[#778da9] text-white">
+              {isLoading ? "Assigning..." : data?.group}
+            </div>
           </div>
         </div>
-        <p className=" text-center">After entering the data, click “Next”.</p>
-        <p className="text-sm text-center text-muted-foreground">
-          If you need to edit the data, click "Edit".
-        </p>
+        <div className=" flex justify-between mt-2 items-end">
+          <p className="text-sm text-center text-muted-foreground">
+            If you need to edit the data, click "Edit".
+          </p>
+          <p className=" text-center ">
+            After entering the data, click “Next”.
+          </p>
+        </div>
       </StepForm>
     </div>
   );
