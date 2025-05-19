@@ -1,5 +1,5 @@
 import { apiClient } from "@/shared/api/apiClient";
-import { RegisterDTO, RegisterResponseDTO } from "./dto";
+import { GroupResponseDTO, RegisterDTO, RegisterResponseDTO } from "./dto";
 
 export const registerService = {
   postRegister: async (data: RegisterDTO): Promise<RegisterResponseDTO> => {
@@ -8,6 +8,12 @@ export const registerService = {
       data
     );
 
+    return response;
+  },
+  getGroupByNeoadj: async (type: string): Promise<GroupResponseDTO> => {
+    const response = await apiClient.get<GroupResponseDTO>(
+      `/group?type=${type}`
+    );
     return response;
   },
 };

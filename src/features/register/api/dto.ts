@@ -6,6 +6,8 @@ export interface RegisterDTO {
   institution: string | null | undefined;
   birthday: string;
   operationDate: string;
+  group: string;
+  serialNum: string;
 }
 
 export interface PatientResponseDTO {
@@ -24,4 +26,10 @@ export interface PatientResponseDTO {
 export interface RegisterResponseDTO {
   message: string;
   patient: PatientResponseDTO;
+}
+
+export interface GroupResponseDTO {
+  id: string;
+  group: string;
+  serial: string;
 }

@@ -58,7 +58,10 @@ const RegisterForm = () => {
       institution: institute?.institution,
       birthday: value.birthday,
       operationDate: value.operationDate,
+      group: value.group,
+      serialNum: value.serialNum,
     };
+    console.log(data);
     mutate(data);
   };
 

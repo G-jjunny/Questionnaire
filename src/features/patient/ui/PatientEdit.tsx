@@ -23,9 +23,10 @@ import { toast } from "sonner";
 interface PatientEditProps extends PropsWithChildren {
   patient: PatientType;
   content?: ReactNode;
+  onSuccess?: () => void;
 }
 
-const PatientEdit = ({ patient, children }: PatientEditProps) => {
+const PatientEdit = ({ patient, children, onSuccess }: PatientEditProps) => {
   const [isOpen, setIsOpen] = useState(false);
   const form = useForm<z.infer<typeof editSchema>>({
     resolver: zodResolver(editSchema),
@@ -43,6 +44,7 @@ const PatientEdit = ({ patient, children }: PatientEditProps) => {
     onSuccess: (res) => {
       toast.success(`${res.message}`);
       setIsOpen(false);
+      onSuccess?.();
     },
   });
 

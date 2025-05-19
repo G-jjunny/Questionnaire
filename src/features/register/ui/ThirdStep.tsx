@@ -1,6 +1,9 @@
 import { UseFormReturn } from "react-hook-form";
 import { registerSchema } from "../model/type";
 import StepForm from "./StepForm";
+import { useQuery } from "@tanstack/react-query";
+import { registerQueries } from "../api/queries";
+import { useEffect } from "react";
 
 interface ThirdStepProps {
   form: UseFormReturn<registerSchema>;
@@ -8,6 +11,18 @@ interface ThirdStepProps {
 
 const ThirdStep = ({ form }: ThirdStepProps) => {
   const values = form.getValues();
+  const { data, isLoading } = useQuery(
+    registerQueries.getGroup(values.isReceived)
+  );
+
+  // group 값이 로드되면 form에 설정
+  useEffect(() => {
+    if (data?.group) {
+      console.log(data);
+      form.setValue("group", data.group);
+      form.setValue("serialNum", data.serial);
+    }
+  }, [data, form]);
 
   return (
     <div className=" flex flex-col gap-2">
@@ -19,11 +34,23 @@ const ThirdStep = ({ form }: ThirdStepProps) => {
           <InfoItem label="Is Received" value={values.isReceived} />
           <InfoItem label="Birthday" value={values.birthday} />
           <InfoItem label="Operation Date" value={values.operationDate} />
+          <div className="flex flex-row text-lg font-bold ">
+            <div className=" w-full text-center p-2 bg-[#1b263b] rounded-bl-md rounded-tl-md text-white">
+              Group
+            </div>
+            <div className=" w-full text-center p-2 rounded-br-md rounded-tr-md bg-[#778da9] text-white">
+              {isLoading ? "Assigning..." : data?.group}
+            </div>
+          </div>
         </div>
-        <p className=" text-center">After entering the data, click “Next”.</p>
-        <p className="text-sm text-center text-muted-foreground">
-          If you need to edit the data, click "Edit".
-        </p>
+        <div className=" flex justify-between mt-2 items-end">
+          <p className="text-sm text-center text-muted-foreground">
+            If you need to edit the data, click "Edit".
+          </p>
+          <p className=" text-center ">
+            After entering the data, click “Next”.
+          </p>
+        </div>
       </StepForm>
     </div>
   );

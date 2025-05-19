@@ -29,6 +29,10 @@ export const getColumns = (role?: string): ColumnDef<PatientType>[] => [
     header: "Neoadj",
   },
   {
+    accessorKey: "group",
+    header: "Group",
+  },
+  {
     accessorKey: "patientId",
     header: "Patient ID",
   },
@@ -42,7 +46,7 @@ export const getColumns = (role?: string): ColumnDef<PatientType>[] => [
   },
   {
     accessorKey: "birthday",
-    header: "Age",
+    header: "Birthday",
   },
   {
     accessorKey: "operationDate",

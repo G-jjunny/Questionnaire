@@ -111,7 +111,11 @@ export const PatientDataTable = () => {
               table.getRowModel().rows.map((row) =>
                 institute?.role === "ADMIN" ? (
                   // {/* // <EditToolTip patient={row.original} key={row.id}> */}
-                  <PatientEdit patient={row.original} key={row.id}>
+                  <PatientEdit
+                    patient={row.original}
+                    key={row.id}
+                    onSuccess={refetch}
+                  >
                     <TableRow
                       // key={row.id}
                       data-state={row.getIsSelected() && "selected"}

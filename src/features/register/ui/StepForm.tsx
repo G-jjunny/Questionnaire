@@ -24,7 +24,7 @@ const StepForm = ({ title, description, children }: StepFormProps) => {
         )}
       </CardHeader>
       <CardContent className="px-0">{children}</CardContent>
-      <div className=" w-full h-[3px] bg-muted-foreground rounded-md"></div>
+      <div className=" w-full h-[3px] bg-muted-foreground rounded-md" />
     </div>
   );
 };
