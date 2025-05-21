@@ -32,6 +32,7 @@ export const PatientDataTable = () => {
     ...patientQueries.patchDropPatient(),
     onSuccess: (res) => {
       toast.success(`${res.message}`);
+      setRowSelection({});
       refetch();
     },
   });
@@ -71,7 +72,6 @@ export const PatientDataTable = () => {
   };
   useEffect(() => {
     console.log(rowSelection);
-    console.log();
   }, [rowSelection]);
   return (
     <>
@@ -110,14 +110,12 @@ export const PatientDataTable = () => {
             {table.getRowModel().rows?.length ? (
               table.getRowModel().rows.map((row) =>
                 institute?.role === "ADMIN" ? (
-                  // {/* // <EditToolTip patient={row.original} key={row.id}> */}
                   <PatientEdit
                     patient={row.original}
                     key={row.id}
                     onSuccess={refetch}
                   >
                     <TableRow
-                      // key={row.id}
                       data-state={row.getIsSelected() && "selected"}
                       className=" text-center"
                     >
@@ -132,7 +130,6 @@ export const PatientDataTable = () => {
                     </TableRow>
                   </PatientEdit>
                 ) : (
-                  // {/* // </EditToolTip> */}
                   <TableRow
                     key={row.id}
                     data-state={row.getIsSelected() && "selected"}

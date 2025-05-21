@@ -40,7 +40,6 @@ const SignForm = () => {
     };
     mutate(data);
   };
-
   return (
     <div>
       <Form {...form}>
@@ -48,6 +47,9 @@ const SignForm = () => {
           onSubmit={form.handleSubmit(onSubmit)}
           className=" flex flex-col gap-3"
         >
+          <h1 className="text-center font-black text-3xl mb-5 sm:text-5xl text-[#415a77]">
+            DLTBB trial
+          </h1>
           <h1 className=" text-center font-bold text-3xl mb-5 sm:text-5xl">
             Multicenter study
             <br />
@@ -80,7 +82,7 @@ const SignForm = () => {
           <p className=" text-center text-sm mt-5 font-medium text-[#778DA9]">
             This system is only accessible to the trial staff.
             <br />
-            Administrator: hj2415@hanmai.net
+            Administrator: heejoonjeong@skku.edu
           </p>
         </form>
       </Form>
