@@ -4,7 +4,7 @@
 사용자는 소속 기관에 따라 역할 기반으로 데이터를 조회·추가할 수 있으며, 관리자(ADMIN)는 전체 데이터를 조회, 수정, 엑셀 파일로 다운로드할 수 있습니다.
 
 ## 🔗 프로젝트 링크
-- **배포 주소** : [https://stratification-tool.netlify.app](https://stratification-tool.netlify.app)
+- **배포 주소** : [https://dltbbtrial.com/](https://stratification-tool.netlify.app)
 - **연동 백엔드** : [Foreign Patient Management Backend](https://github.com/G-jjunny/Stratification-Tool)
 ---
   
