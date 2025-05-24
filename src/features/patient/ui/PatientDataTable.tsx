@@ -47,8 +47,6 @@ export const PatientDataTable = () => {
 
   const columns = getColumns(institute?.role);
 
-  console.log(patients);
-
   const sortedPatients = React.useMemo(() => {
     if (!patients) return [];
 
