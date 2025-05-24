@@ -22,6 +22,7 @@ import { toast } from "sonner";
 import { handleExcel } from "../model/handleExcel";
 import { getColumns } from "../model/patientTable";
 import PatientEdit from "./PatientEdit";
+import { sortByCreatedAtDesc } from "../model/sortByCreatedAtDesc";
 
 export const PatientDataTable = () => {
   const institute = useUserStore((state) => state.user);
@@ -46,8 +47,14 @@ export const PatientDataTable = () => {
 
   const columns = getColumns(institute?.role);
 
+  const sortedPatients = React.useMemo(() => {
+    if (!patients) return [];
+
+    return sortByCreatedAtDesc(patients);
+  }, [patients]);
+
   const table = useReactTable({
-    data: patients ?? [],
+    data: sortedPatients ?? [],
     columns: columns,
     getCoreRowModel: getCoreRowModel(),
     getPaginationRowModel: getPaginationRowModel(),

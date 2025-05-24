@@ -22,7 +22,7 @@ const FirstStep = ({ form }: FirstStepProps) => {
               {
                 label: (
                   <p className="text-lg">
-                    <span className="font-bold">Yes</span> he/she has received
+                    <span className="font-bold">Yes</span>, he/she has received
                     neoadjuvant therapy.
                   </p>
                 ),
@@ -31,7 +31,7 @@ const FirstStep = ({ form }: FirstStepProps) => {
               {
                 label: (
                   <p className="text-lg">
-                    <span className="font-bold">No</span> No, he/she has not
+                    <span className="font-bold">No</span>, he/she has not
                     received neoadjuvant therapy.
                   </p>
                 ),

@@ -1,21 +1,9 @@
 import { Checkbox } from "@/shared/ui/shadcn/checkbox";
 import { Label } from "@/shared/ui/shadcn/label";
 import { ColumnDef } from "@tanstack/react-table";
+import { patientResponseDTO } from "../api/dto";
 
-export type PatientType = {
-  id: string;
-  isReceived: string;
-  patientId: string;
-  patientName: string;
-  isMale: string;
-  birthday: string;
-  operationDate: string;
-  institution: string;
-  droped?: boolean;
-  group?: string | null;
-};
-
-export const getColumns = (role?: string): ColumnDef<PatientType>[] => [
+export const getColumns = (role?: string): ColumnDef<patientResponseDTO>[] => [
   {
     header: "No",
     cell: ({ row }) => row.index + 1,

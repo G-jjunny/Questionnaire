@@ -1,4 +1,16 @@
-import { PatientType } from "../model/patientTable";
+export type PatientType = {
+  id: string;
+  isReceived: string;
+  patientId: string;
+  patientName: string;
+  isMale: string;
+  birthday: string;
+  operationDate: string;
+  serialNum: string;
+  institution: string;
+  droped?: boolean;
+  group?: string | null;
+};
 
 export interface patientResponseDTO extends PatientType {
   createdAt: string;

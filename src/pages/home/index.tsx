@@ -1,5 +1,6 @@
 import { ROUTES } from "@/shared/contants/routes";
-import { Button } from "@/shared/ui/shadcn/button";
+import CardButton from "@/shared/ui/ui/CardButton";
+import { FileSignature, ListCheck } from "lucide-react";
 import { useNavigate } from "react-router-dom";
 
 const HomePage = () => {
@@ -7,28 +8,22 @@ const HomePage = () => {
 
   return (
     <div className=" flex flex-col gap-5">
-      <h3 className=" text-2xl font-bold">Please select a menu</h3>
-      <div className=" flex gap-5">
-        <Button
-          variant="link"
-          className=" h-[100px] bg-[#415A77] font-bold text-md text-white cursor-pointer"
+      <h3 className=" text-2xl font-bold text-center">Please select a menu</h3>
+      <div className=" flex gap-5 md:flex-row flex-col">
+        <CardButton
+          title="Register New Participant"
+          des="Register new patient data and assign a groups"
+          footer="Click to Register Page"
+          icon={FileSignature}
           onClick={() => navigate(ROUTES.REGISTER)}
-        >
-          Register
-          <br />
-          New
-          <br />
-          Participant
-        </Button>
-        <Button
-          variant="link"
-          className="h-[100px] bg-[#415A77] font-bold text-md text-white cursor-pointer"
+        />
+        <CardButton
+          title="Enrollment List"
+          des="Register new patient data and assign a groups"
+          footer="Click to Enrollment List Page"
+          icon={ListCheck}
           onClick={() => navigate(ROUTES.LIST.BASE)}
-        >
-          Enrollment
-          <br />
-          List
-        </Button>
+        />
       </div>
     </div>
   );

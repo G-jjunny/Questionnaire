@@ -8,7 +8,6 @@ import {
   DialogTrigger,
 } from "@/shared/ui/shadcn/dialog";
 import { PropsWithChildren, ReactNode, useEffect, useState } from "react";
-import { PatientType } from "../model/patientTable";
 import { Button } from "@/shared/ui/shadcn/button";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
@@ -19,6 +18,7 @@ import { Form } from "@/shared/ui/shadcn/form";
 import { useMutation } from "@tanstack/react-query";
 import { patientQueries } from "../api/queries";
 import { toast } from "sonner";
+import { PatientType } from "../api/dto";
 
 interface PatientEditProps extends PropsWithChildren {
   patient: PatientType;
