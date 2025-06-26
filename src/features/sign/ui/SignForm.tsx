@@ -45,12 +45,12 @@ const SignForm = () => {
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className=" flex flex-col gap-3"
+          className=" flex flex-col gap-6"
         >
-          <h1 className="text-center font-black text-3xl mb-5 sm:text-5xl text-[#415a77]">
+          <h1 className="text-center font-black text-3xl mb-3 sm:text-5xl text-[#415a77]">
             DLTBB trial
           </h1>
-          <h1 className=" text-center font-bold text-3xl mb-5 sm:text-5xl">
+          <h1 className=" text-center font-bold text-3xl mb-3 sm:text-5xl">
             Multicenter study
             <br />
             Enrollment system
